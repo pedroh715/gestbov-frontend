@@ -4,6 +4,10 @@
     font-family: 'Poppins', sans-serif;
 }
 
+body{
+    background-color: #f4f4f4;
+}
+
 #login{
     display: flex;
     flex-direction: column;
@@ -20,7 +24,7 @@
 }
 
 #login .field{
-    padding-bottom: 1.5rem;
+    padding-bottom: 1rem;
 }
 
 #login .form{
@@ -43,13 +47,12 @@
 }
 
 #login .field input::placeholder{
-    color: #f2f2f2;
+    color: #6d99a8;
     
 }
 
 #login .actions {
     text-align: center;
-    
 }
 
 #login .actions button {
