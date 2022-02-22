@@ -2,68 +2,135 @@
 
 *{
     font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body{
     background-color: #f4f4f4;
 }
 
-#login{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.body{ /* ESSA DIV É COMO SE FOSSE O BODY */
     min-height: 100vh;
-    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;  
 }
 
-#login .title{
-    text-align: left;
+.forms{
+    position: relative;
+    max-width: 490px;
     width: 100%;
-    max-width: 434px;
-}
-
-#login .field{
-    padding-bottom: 1rem;
-}
-
-#login .form{
-    width: 100%;
-    max-width: 434px;
-}
-
-#login .field input {
-    width: 100%;
-    height: 52px;
-    outline: none;
-    border: none;
     background-color: #224957;
-    color: #f2f2f2;
     border-radius: 10px;
-    padding-left: 50px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.forms .form{
+    padding: 30px;
+}
+
+.forms .form .title{
+    position: relative;
+    font-size: 30px;
     font-weight: 600;
-    letter-spacing: 0.5px;
+    color: #f4f4f4;
+}
+
+.forms .input-field{
+    position: relative;
+    height: 50px;
+    width: 100%;
+    margin-top: 24px;
+}
+
+.input-field input{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    padding: 0 35px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+    border-bottom: 2px solid #6D99A8;
+    border-top: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.input-field input:is(:focus, :valid){
+    border-bottom-color: #72C14D;
+}
+
+.input-field input:is(:focus, :valid) ~ i{
+    border-bottom-color: #72C14D;
+    color: #72C14D;
+}
+
+.input-field i{
+    position: absolute;
+    top: 50%;
+    font-size: 23px;
+    color: #6D99A8;
+    transform: translateY(-50%);
+}
+
+.input-field i.icon{
+    left: 0;
+}
+
+.input-field i.showHidePw{
+    right: 0;
+}
+
+.input-field input::placeholder{
+    color: #6D99A8;
+}
+
+.form .toLogin{
+    margin-top: 20px;
+    color: white;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+}
+
+.toLogin .content{
+    display: flex;
+    align-items: center;
+}
+
+.content input{
+    accent-color: #72C14D;
+    margin: 0 8px -2px 4px;
+}
+
+.form .forgot:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.form .text{
     font-size: 14px;
 }
 
-#login .field input::placeholder{
-    color: #6d99a8;
-    
+.form .button{
+    margin-top:35px;
 }
 
-#login .actions {
-    text-align: center;
-}
-
-#login .actions button {
-    height: 52px;
-    width: 356px;
-    cursor: pointer;
+.form .button input{
     border: none;
-    border-radius: 10px;
-    letter-spacing: 0.5px;
-    font-weight: 600;
-    background-color: #72C14D;
-    color: #f2f2f2;
-    font-size: 18px;
+    background-color:#72C14D;
+    font-size: 17px;
+    letter-spacing: .5px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.form .button input:hover{
+    background-color:#5da73b;
+    border-radius: 2px;
 }

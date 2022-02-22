@@ -1,52 +1,87 @@
-import React, { useState, useContext } from 'react'
-
-import { AuthContext } from '../../contexts/auth'
+import React, { useState } from 'react'
+import { useToast, Stack, Button } from '@chakra-ui/react'
 import './styles.css'
+import { useAuth } from '../../contexts/AuthContext'
+
 
 const LoginPage = () => {
-  const {authenticated, login} = useContext(AuthContext)
-
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("submit", {email, password})
-
-    login(email, password) //integração com o meu contexto
-  } 
+  const [ email, setEmail ] = useState('')
+  const [ password, setPassword ] = useState('')
+  const [ isSubmitting, setIsSubmitting ] = useState(false)
+  const toast = useToast()
+    
+  const { login } = useAuth()
 
   return (
-    <div id="login">
-      <h1 className="title">Login</h1>
-      <form className="form" onSubmit={handleSubmit}>
+    <div className="body">
+      <div className="forms">
+        <div className="form login">
+          <span className="title">Login</span>
+          <form action="#" onSubmit={async e => {
+            e.preventDefault()
 
-        <div className="field">
-          <input 
-          type="email" 
-          name='email' 
-          id='email' 
-          placeholder='Insira seu email' 
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}  
-          />
+            if (!password || !email) {
+              toast({
+                  description: 'Credenciais Inválidas',
+                  status: 'error',
+                  duration: 5000,
+                  isClosable: true,
+              })
+          }
+          setIsSubmitting(true)
+          login(email, password)
+          .then(response => console.log(response))
+          .catch(error => {
+              console.log(error.message)
+              toast({
+                  description: error.message,
+                  status: 'error',
+                  duration: 5000,
+                  isClosable: true,
+              })})
+          .finally(() => setIsSubmitting(false))
+
+          }}>
+            <div className="input-field">
+              <input value={email} 
+              onChange={e => setEmail(e.target.value)}  type="email" placeholder="Insira seu email" required/>
+              <i className="uil uil-envelope icon"></i>
+            </div>
+
+            <div className="input-field">
+              <input type="password" placeholder="Insira sua senha" required/>            
+              <i className="uil uil-lock icon"></i>
+              <i className="uil uil-eye-slash showHidePw"></i>
+            </div>    
+
+            <div className="toLogin">
+              <div className="content">
+                <input value={password} 
+                onChange={e => setPassword(e.target.value)}
+                type="checkbox" 
+                id="logCheck"/>
+                <label htmlFor="logCheck" className="text">Lembrar de mim</label>
+              </div>
+              <label htmlFor="" className="forgot text">Esqueceu sua senha?</label>
+            </div>  
+
+            {/* <div className="input-field button">
+              <input type="button" value="Login"/>
+              </div> */}
+
+            <Stack alignn='center' marginTop='34'>
+              <Button type="submit" 
+              isLoading={isSubmitting}
+              bg='#72C14D'
+              color='white'
+              _hover={{ bg: '#5da73b' }}
+              size="lg" 
+              fontSize='md'>Login</Button>"
+            </Stack>
+
+          </form>
         </div>
-
-        <div className="field">
-          <input 
-          type="password" 
-          name='password' 
-          id='password' 
-          placeholder='Insira sua senha' 
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-
-        <div className="actions">
-          <button type='submit'>Login</button>
-        </div>
-
-      </form>
+      </div>
     </div>
   )
 }
