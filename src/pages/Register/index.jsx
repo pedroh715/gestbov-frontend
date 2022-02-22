@@ -109,12 +109,11 @@ export default function CreateAccount() {
 
 import React, { useState } from 'react'
 import './styles.css'
-import { useHistory } from 'react-router-dom'
 import { Button, useToast, Stack } from '@chakra-ui/react'
 import { useAuth } from '../../contexts/AuthContext'
 
 const Register = () => {
-    const history = useHistory()
+    
 
     const [ name, setName ] = useState('')
     const [ email, setEmail ] = useState('')
