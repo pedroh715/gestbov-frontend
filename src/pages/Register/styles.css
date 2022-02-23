@@ -20,7 +20,7 @@ body{
 
 .forms{
     position: relative;
-    max-width: 490px;
+    max-width: 500px;
     width: 100%;
     background-color: #224957;
     border-radius: 10px;
@@ -90,132 +90,25 @@ body{
     color: #6D99A8;
 }
 
-.form .toLogin{
+
+
+.toLogin{
     margin-top: 20px;
+}
+
+.toLogin .login{
     color: white;
+    font-size: 14px;
     font-weight: 500;
-    display: flex;
-    font-size: 14px;
 }
 
-.form .button{
-    margin-top:35px;
-}
-
-.form .button input{
-    border: none;
-    background-color:#72C14D;
-    font-size: 17px;
+.toLogin .loginText{
+    font-weight: 600;
     letter-spacing: .5px;
-    border-radius: 7px;
     cursor: pointer;
+    color: #72C14D;
 }
 
-.form .button input:hover{
-    background-color:#5da73b;
-    border-radius: 2px;
+.toLogin .loginText:hover{
+    text-decoration: underline;
 }
-/* 
-#create-acc{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 0 2rem;
-}
-
-#create-acc .title{
-    text-align: left;
-    width: 100%;
-    max-width: 434px;
-}
-
-#create-acc .field{
-    padding-bottom: 1rem;
-}
-
-#create-acc .form{
-    width: 100%;
-    max-width: 434px;
-}
-
-#create-acc .field input {
-    width: 100%;
-    height: 52px;
-    outline: none;
-    border: none;
-    background-color: #224957;
-    color: #f2f2f2;
-    border-radius: 10px;
-    padding-left: 50px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    font-size: 14px;
-}
-
-#create-acc .field input::placeholder{
-    color: #6d99a8;
-}
-
-#create-acc .haveAcc{
-    font-weight: bold;
-    color: #224957;
-    font-size: 15px;
-}
-
-#create-acc .actions {
-    text-align: center;
-}
-
-#create-acc .actions button{
-    height: 52px;
-    width: 356px;
-    cursor: pointer;
-    border: none;
-    border-radius: 10px;
-    letter-spacing: 0.5px;
-    font-weight: 600;
-    background-color: #72C14D;
-    color: #f2f2f2;
-    font-size: 18px;
-    margin-top: 1rem;
-}
-
-#create-acc .haveAccount{
-    color: #224957;
-    font-weight: 600;
-} */
-/*
-#btn-start{
-    background-color: #72C14D;
-    outline: none;
-    margin-top: 10px;
-    height: 50px;
-    font-weight: 600;
-    font-size: 15px;
-    border-radius: 10px;
-}
-
-#email-input{
-    background-color: #224957;
-    height: 50px;
-    color: white;
-    border-radius: 10px;
-}
-
-#password-input{
-    background-color: #224957;
-    height: 50px;
-    color: white;
-    border-radius: 10px;
-}
-
-#passwordConfirm-input{
-    background-color: #224957;
-    height: 50px;
-    color: white;
-    border-radius: 10px;
-}
-
-*/

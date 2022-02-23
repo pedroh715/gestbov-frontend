@@ -20,7 +20,7 @@ body{
 
 .forms{
     position: relative;
-    max-width: 490px;
+    max-width: 500px;
     width: 100%;
     background-color: #224957;
     border-radius: 10px;
@@ -117,20 +117,35 @@ body{
     font-size: 14px;
 }
 
-.form .button{
-    margin-top:35px;
+.divider{
+    display: flex;
+    padding: 12px 0 12px 0;
+    align-items: center;
 }
 
-.form .button input{
-    border: none;
-    background-color:#72C14D;
-    font-size: 17px;
+.divider h4{
+    padding: 0 8px 0 8px;
+    color: white;
+    font-weight: 400;
+}
+
+.notAccount{
+    margin-top: 20px;
+}
+
+.notAccount .not{
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.notAccount .create{
+    font-weight: 600;
     letter-spacing: .5px;
-    border-radius: 7px;
     cursor: pointer;
+    color: #72C14D;
 }
 
-.form .button input:hover{
-    background-color:#5da73b;
-    border-radius: 2px;
+.notAccount .create:hover{
+    text-decoration: underline;
 }

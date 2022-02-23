@@ -1,119 +1,16 @@
- /* import React,  { useState, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import './styles.css'
-import { Link } from 'react-router-dom'
-
-const CreateAccount = () => {
-    const emailRef = useRef()
-    const passwordRef = useRef()
-    const passwordConfirmRef = useRef()
-
-    return (
-        <div id="create-acc">
-            <h1 className="title">Criar Conta</h1>
-            <form className="form">
-                <div className="field">
-                    <input
-                    type="text"
-                    name='name-user'
-                    id='name-user'
-                    placeholder='Insira seu nome completo' 
-                   
-                    />
-                </div>
-                <div className="field">
-                    <input
-                    type="email"
-                    name='email'
-                    id='email-user'
-                    placeholder='Insira seu email' 
-                    ref={emailRef}
-                    />
-                </div>
-                <div className="field">
-                    <input 
-                    type="date"
-                    name='date-of-birth-user'
-                    id='dateOfBirth'
-                    placeholder='Insira sua data de nascimento (apenas números)' 
-                    
-                    />
-                </div>
-                <div className="field">
-                    <input 
-                    type="password" 
-                    name='password' 
-                    id='password' 
-                    placeholder='Insira sua senha' 
-                    ref={passwordRef}
-                    />
-                </div>
-                <div className="field">
-                    <input 
-                    type="password" 
-                    name='confirmPassword' 
-                    id='confirmPassword' 
-                    placeholder='Confirme sua senha' 
-                    ref={passwordConfirmRef}
-                    />
-                </div>
-
-                <label htmlFor="">Já possui uma conta? </label>
-                <Link to="/login" className="haveAccount">Log In</Link>
-                
-
-                <div className="actions">
-                    <button>Começar agora!</button>
-                </div>
-            </form>
-        </div>      
-    )
-}
-
-export default CreateAccount */
-
-/* import React, { useRef, useState } from 'react'
-import { Form, Button, Card, Alert } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-import './styles.css'
-
-export default function CreateAccount() {
-  return (
-    <>
-                <h2 className="text-center mb-4">Crie sua conta</h2>
-                <Form>
-                    <Form.Group id="email">
-                        <Form.Label>Email</Form.Label>
-                        <Form.Control type="email" id="email-input"  required placeholder="Insira seu email" />
-                    </Form.Group>
-
-                    <Form.Group id="password">
-                        <Form.Label>Senha</Form.Label>
-                        <Form.Control type="password" id="password-input"  required placeholder="Insira sua senha" />
-                    </Form.Group>
-
-                    <Form.Group id="password-confirm">
-                        <Form.Label>Confirmar senha</Form.Label>
-                        <Form.Control type="password" id="passwordConfirm-input" required placeholder="Confirme sua senha" />
-                    </Form.Group>
-                    <Button className="w-100" id="btn-start" type="submit">Começar Agora</Button>
-                </Form>
-           
-        <div className="w-100 text-center mt-2">
-            Jà possui uma conta? <b> Log In</b>
-        </div>
-    </>
-  )
-}
-
-*/
-
-import React, { useState } from 'react'
-import './styles.css'
-import { Button, useToast, Stack } from '@chakra-ui/react'
+import { Button, useToast, Stack, Divider } from '@chakra-ui/react'
+import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthContext'
+import { BsGoogle } from 'react-icons/bs'
+import useMounted  from '../../hooks/useMounted'
 
 const Register = () => {
-    
+    const passwordRef = useRef()
+    const confirmPasswordRef = useRef()
+
+    const [ isError, setIsError ] = useState('')
 
     const [ name, setName ] = useState('')
     const [ email, setEmail ] = useState('')
@@ -124,6 +21,9 @@ const Register = () => {
     
     const { register } = useAuth()
 
+    const mounted = useMounted()
+
+    
   return (
         <div className="body">
             <div className="forms">
@@ -140,6 +40,20 @@ const Register = () => {
                                 isClosable: true,
                             })
                         }
+
+                        if (passwordRef.current.value !== confirmPasswordRef.current.value) {
+                            toast({
+                                description: 'As senhas não coincidem',
+                                status: 'error',
+                                duration: 3000,
+                                isClosable: true,
+                            })
+                            return (
+                                setIsError('As senhas não coincidem')
+                            )
+                        }
+
+
                         setIsSubmitting(true)
                         register(email, password)
                         .then(response => console.log(response))
@@ -151,7 +65,7 @@ const Register = () => {
                                 duration: 5000,
                                 isClosable: true,
                             })})
-                        .finally(() => setIsSubmitting(false))
+                        .finally(() => mounted.current && setIsSubmitting(false))
 
                         }}>
                         <div className="input-field">
@@ -171,6 +85,7 @@ const Register = () => {
                         <div className="input-field">
                             <input value={password} 
                             onChange={e => setPassword(e.target.value)} 
+                            ref={passwordRef}
                             type="password" 
                             placeholder="Insira sua senha" 
                             required/>
@@ -180,30 +95,55 @@ const Register = () => {
 
                         <div className="input-field">
                             <input value={confirmPassword} 
-                            onChange={e => setConfirmPassword(e.target.value)} 
+                            ref={confirmPasswordRef}
+                            onChange={(e) => setConfirmPassword(e.target.value)} 
                             type="password"  
                             placeholder="Confirme sua senha" required/>
                             <i className="uil uil-lock icon"></i>
                             <i className="uil uil-eye-slash showHidePw"></i>
-                        </div>  
+                        </div>
+                        
 
                         <div className="toLogin">
-                            <label htmlFor="">Já possui uma conta? <span>Log In</span></label>
-                        </div>  
+                            <label className="login">Já possui uma conta? <Link to={'/login'}> <label className="login loginText">Log In</label></Link></label>
+                        </div>
 
-                        <Stack alignn='center' marginTop='34'>
+                        <Stack alignn='center' marginTop='5'>
                             <Button type="submit" 
                             isLoading={isSubmitting} 
                             bg='#72C14D'
                             color='white'
                             _hover={{ bg: '#5da73b'}}
                             size="lg" 
-                            fontSize='md'>Criar Conta</Button>
+                            fontSize='md'
+                            
+                            >Criar Conta</Button>
                         </Stack>
                     </form>
+
+            {/* BOTAO LOGAR COM GOOGLE
+            <div className="divider">
+                <Divider width={210}/>     
+                <h4>OU</h4> 
+                <Divider width={210}/>
+            </div>
+          
+            <Stack>
+            <Button
+                size="lg"
+                fontSize='md'
+                isFullWidth
+                leftIcon={<BsGoogle/>}
+                colorScheme='red'
+                onClick={() => signInWithGoogle().then(user => console.log(user)).catch(error => console.log(error))}
+            >
+                Fazer Login com o Google
+                </Button>
+            </Stack>
+            */}
+                    </div>
                 </div>
             </div>
-        </div>
   )
 }
 
