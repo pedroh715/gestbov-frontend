@@ -10,7 +10,8 @@ import { createUserWithEmailAndPassword,
         confirmPasswordReset,
         setPersistence,
         signInWithRedirect,
-        inMemoryPersistence
+        inMemoryPersistence,
+        sendEmailVerification
 } from 'firebase/auth'
 
 const AuthContext = createContext({
@@ -53,14 +54,14 @@ export default function AuthContextProvider({ children }) {
 
     function resetPassword(oobCode, newPassword) {
         return confirmPasswordReset(auth, oobCode, newPassword)
-    }
+    } 
 
     function logout() {
         return signOut(auth)
     }
 
     function forgotPassword(email) {
-        return sendPasswordResetEmail(auth, email, {url: 'http://localhost:3000/login'})
+        return sendPasswordResetEmail(auth, email, {url: 'https://gestbov.herokuapp.com/login'})
     }
 
     const value = {

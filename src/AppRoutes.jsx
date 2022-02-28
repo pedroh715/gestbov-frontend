@@ -9,7 +9,7 @@ import {
 import LoginPage from './pages/LoginPage'
 import SignIn from './pages/Register'
 import HomePage from './pages/HomePage'
-import Sucess from './pages/SuccessfullyCreated'
+import Success from './pages/SuccessfullyCreated'
 import NotFound from './pages/NotFoundPage'
 import ForgotPassword from './pages/ForgotPassword'
 import ResetPassword from './pages/ResetPassword'
@@ -37,6 +37,7 @@ const AppRoutes = () => {
                     <Route exact path='*' element={<NotFound/>}/>
                     <Route exact path='/esqueci-minha-senha' element={<ForgotPassword/>}/>
                     <Route exact path='/alterar-senha' element={<ResetPassword/>}/>
+                    <Route exact path='/success' element={<Success/>}/>
                                 
                 </Routes>  
             </AuthContextProvider>

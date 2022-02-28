@@ -4,11 +4,17 @@ import { Button, useToast, Stack, Divider } from '@chakra-ui/react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthContext'
 import { BsGoogle } from 'react-icons/bs'
+import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai'
 import useMounted  from '../../hooks/useMounted'
 
 const Register = () => {
+    const navigate = useNavigate()
+
     const passwordRef = useRef()
     const confirmPasswordRef = useRef()
+
+    const [ showPassword, setShowPassword ] = useState(false)
+    const [ showPasswordConfirm, setShowPasswordConfirm ] = useState(false)
 
     const [ isError, setIsError ] = useState('')
 
@@ -56,7 +62,10 @@ const Register = () => {
 
                         setIsSubmitting(true)
                         register(email, password)
-                        .then(response => console.log(response))
+                        .then(response => {
+                            console.log(response)
+                            navigate('/success')
+                        })
                         .catch(error => {
                             console.log(error.message)
                             toast({
@@ -86,21 +95,27 @@ const Register = () => {
                             <input value={password} 
                             onChange={e => setPassword(e.target.value)} 
                             ref={passwordRef}
-                            type="password" 
+                            type={showPassword ? 'text' : 'password'}
                             placeholder="Insira sua senha" 
                             required/>
                             <i className="uil uil-lock icon"></i>
-                            <i className="uil uil-eye-slash showHidePw"></i>
+                            <button type='button' onClick={() => setShowPassword(prevState => !prevState)}>
+                                {showPassword ? <AiOutlineEye className="showHidePw eye"/> :
+                                <AiOutlineEyeInvisible className="showHidePw eye"/>}
+                            </button>
                         </div>    
 
                         <div className="input-field">
                             <input value={confirmPassword} 
                             ref={confirmPasswordRef}
                             onChange={(e) => setConfirmPassword(e.target.value)} 
-                            type="password"  
+                            type={showPasswordConfirm ? 'text' : 'password'} 
                             placeholder="Confirme sua senha" required/>
                             <i className="uil uil-lock icon"></i>
-                            <i className="uil uil-eye-slash showHidePw"></i>
+                            <button type='button' onClick={() => setShowPasswordConfirm(prevState => !prevState)}>
+                                {showPasswordConfirm ? <AiOutlineEye className="showHidePw eye"/> :
+                                <AiOutlineEyeInvisible className="showHidePw eye"/>}
+                            </button>
                         </div>
                         
 
@@ -120,31 +135,10 @@ const Register = () => {
                             >Criar Conta</Button>
                         </Stack>
                     </form>
-
-            {/* BOTAO LOGAR COM GOOGLE
-            <div className="divider">
-                <Divider width={210}/>     
-                <h4>OU</h4> 
-                <Divider width={210}/>
-            </div>
-          
-            <Stack>
-            <Button
-                size="lg"
-                fontSize='md'
-                isFullWidth
-                leftIcon={<BsGoogle/>}
-                colorScheme='red'
-                onClick={() => signInWithGoogle().then(user => console.log(user)).catch(error => console.log(error))}
-            >
-                Fazer Login com o Google
-                </Button>
-            </Stack>
-            */}
-                    </div>
                 </div>
             </div>
-  )
+        </div>
+    )
 }
 
 

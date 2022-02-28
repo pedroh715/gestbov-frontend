@@ -4,32 +4,21 @@ import './styles.css'
 import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthContext'
 import { BsGoogle } from 'react-icons/bs'
+import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai'
 import useMounted  from '../../hooks/useMounted'
-import { useCookies } from 'react-cookie'
 
 
 const LoginPage = () => {
   const navigate = useNavigate()
-  const [cookies, setCookie] = useCookies(['user'])
-  const [checked, setChecked] = useState(false)
-
+  
+  const [ showPassword, setShowPassword ] = useState(false)
   const [ email, setEmail ] = useState('')
   const [ password, setPassword ] = useState('')
   const [ isSubmitting, setIsSubmitting ] = useState(false)
   const toast = useToast()
-    
   const { login, signInWithGoogle } = useAuth()
-
   const mounted = useMounted()
 
-  const remember = () => {
-    setChecked(!checked)
-    
-    if (checked) {
-      setCookie('Name', email, { path: '/dashboard' })
-      setCookie('Password', password, { path: '/dashboard' })
-    }
-  }
 
   return (
     <div className="body">
@@ -79,12 +68,16 @@ const LoginPage = () => {
 
             <div className="input-field">
               <input 
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               value={password} 
               onChange={e => setPassword(e.target.value)}
               placeholder="Insira sua senha" required/>            
               <i className="uil uil-lock icon"></i>
-              <i className="uil uil-eye-slash showHidePw"></i>
+
+              <button type='button' onClick={() => setShowPassword(prevState => !prevState)}>
+                {showPassword ? <AiOutlineEye className="showHidePw eye"/> :
+                <AiOutlineEyeInvisible className="showHidePw eye"/> }
+              </button>
             </div>    
 
             <div className="toLogin">
@@ -92,7 +85,7 @@ const LoginPage = () => {
                 <input 
                 type="checkbox" 
                 id="logCheck"/>
-                <label htmlFor="logCheck" className="text" onClick={remember} checked={checked}>Lembrar de mim</label>
+                <label htmlFor="logCheck" className="text">Lembrar de mim</label>
               </div>
               <Link to={'/esqueci-minha-senha'}>
               <label htmlFor="" className="forgot text">Esqueceu sua senha?</label>

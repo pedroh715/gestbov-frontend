@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{ /* ESSA DIV É COMO SE FOSSE O BODY */
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;  
+    background-color: #093545;  
+}
+
+.square{
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 10px;
+    background-color: #224957;
+    box-shadow: 0 0 10px #03212c4f;
+    justify-content: center;
+}
+
+.square .components{
+    padding: 50px;
+    text-align: center;
+}
+
+.square .components .button{
+    margin-top: 20px;
+    font-weight: 500;
+}
+
+.square .title{
+    position: relative;
+    font-size: 25px;
+    font-weight: 600;
+    color: #f4f4f4;
+}
+
+.cow{
+    max-width: 300px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}

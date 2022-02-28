@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
 import App from './App';
-import { CookiesProvider } from 'react-cookie'
+
 import './index.css'
 import {
   ChakraProvider,
@@ -22,12 +22,10 @@ const customTheme = extendTheme({
 
 ReactDOM.render(
   <React.StrictMode>
-    <CookiesProvider>
       <ChakraProvider theme={customTheme}>
         <ColorModeScript initialColorMode={customTheme.config.initialColorMode}/>
         <App />
       </ChakraProvider>
-    </CookiesProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
